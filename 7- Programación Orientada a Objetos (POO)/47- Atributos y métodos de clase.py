@@ -1,5 +1,8 @@
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
+from datetime import date
+
+def calculate_age(anio, mes, dia):
+    today = date.today()
+    return today.year - anio - ((today.month, today.day) < (mes, dia))
 
 class Perro:
     hambre = True
@@ -18,8 +21,8 @@ class Perro:
 
     def calcular_edad(self):
         self.fecha_de_nacimiento = input("Ingresa la fecha de nacimiento (dd/mm/aaaa)\n")
-        dia, mes, año = self.fecha_de_nacimiento.split("/")
-        self.edad = relativedelta(datetime.now(), datetime(int(año), int(mes), int(dia))).years
+        dia, mes, anio = self.fecha_de_nacimiento.split("/")
+        self.edad = calculate_age(int(anio), int(mes), int(dia))
 
     def alimentar(self):
         self.hambre = False
